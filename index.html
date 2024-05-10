@@ -8,15 +8,33 @@
         /* CSS стилі */
         body {
             font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
         }
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
         }
         input[type="text"], textarea, select {
             width: 100%;
             padding: 8px;
+            margin-top: 5px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -29,46 +47,59 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            display: block;
+            margin: 0 auto;
         }
         button:hover {
             background-color: #45a049;
+        }
+        .generated-direction {
+            background-color: #f9f9f9;
+            border-left: 6px solid #7db4e6;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .generated-direction h3 {
+            margin-top: 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Генератор направлень на перездачу</h2>
-        <form id="directionForm">
-            <label for="group">Група:</label>
-            <select id="group" name="group" required>
-                <option value="">Оберіть групу</option>
-                <option value="Group A">Група A</option>
-                <option value="Group B">Група B</option>
-                <option value="Group C">Група C</option>
-                <!-- Додайте інші групи за потребою -->
-            </select>
+        <h1>Генератор направлень на перездачу</h1>
+        <div class="form-container">
+            <form id="directionForm">
+                <label for="group">Група:</label>
+                <select id="group" name="group" required>
+                    <option value="">Оберіть групу</option>
+                    <option value="Group A">Група A</option>
+                    <option value="Group B">Група B</option>
+                    <option value="Group C">Група C</option>
+                    <!-- Додайте інші групи за потребою -->
+                </select>
 
-            <label for="course">Курс:</label>
-            <select id="course" name="course" required>
-                <option value="">Оберіть курс</option>
-                <option value="Курс 1">Курс 1</option>
-                <option value="Курс 2">Курс 2</option>
-                <option value="Курс 3">Курс 3</option>
-                <!-- Додайте інші курси за потребою -->
-            </select>
+                <label for="course">Курс:</label>
+                <select id="course" name="course" required>
+                    <option value="">Оберіть курс</option>
+                    <option value="Курс 1">Курс 1</option>
+                    <option value="Курс 2">Курс 2</option>
+                    <option value="Курс 3">Курс 3</option>
+                    <!-- Додайте інші курси за потребою -->
+                </select>
 
-            <label for="title">Заголовок:</label>
-            <input type="text" id="title" name="title" required>
+                <label for="title">Заголовок:</label>
+                <input type="text" id="title" name="title" required>
 
-            <label for="description">Опис:</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
+                <label for="description">Опис:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
 
-            <label for="email">Адреса електронної пошти:</label>
-            <input type="email" id="email" name="email" required>
+                <label for="email">Адреса електронної пошти:</label>
+                <input type="email" id="email" name="email" required>
 
-            <button type="submit">Згенерувати напрямок</button>
-        </form>
-        <div id="output"></div>
+                <button type="submit">Згенерувати напрямок</button>
+            </form>
+        </div>
+        <div id="output" class="generated-direction"></div>
     </div>
 
     <script>
@@ -84,25 +115,10 @@
             var email = document.getElementById('email').value;
 
             // Генеруємо напрямок
-            var direction = "Група: " + group + "\nКурс: " + course + "\nЗаголовок: " + title + "\nОпис: " + description + "\nАдреса електронної пошти: " + email;
+            var direction = "<h3>Згенерований напрямок:</h3><p><strong>Група:</strong> " + group + "</p><p><strong>Курс:</strong> " + course + "</p><p><strong>Заголовок:</strong> " + title + "</p><p><strong>Опис:</strong> " + description + "</p><p><strong>Адреса електронної пошти:</strong> " + email + "</p>";
 
-            // Відправляємо напрямок на електронну пошту
-            var subject = "Напрямок на перездачу";
-            var body = direction;
-            var mailToLink = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-
-            // Відкриваємо поштовий клієнт з заповненим листом
-            window.location.href = mailToLink;
-
-            // Опціонально: Очистити поля форми після відправки
-            document.getElementById('group').value = "";
-            document.getElementById('course').value = "";
-            document.getElementById('title').value = "";
-            document.getElementById('description').value = "";
-            document.getElementById('email').value = "";
-
-            // Виводимо напрямок на сторінці
-            document.getElementById('output').innerHTML = "<h3>Згенерований напрямок:</h3>" + direction;
+            // Додаємо напрямок на сторінку
+            document.getElementById('output').innerHTML = direction;
         });
     </script>
 </body>
