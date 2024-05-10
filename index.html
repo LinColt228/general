@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор направлень на перездачу</title>
     <style>
-        /* CSS стилі */
         body {
             font-family: Arial, sans-serif;
             background-color: #f3f3f3;
@@ -71,10 +70,14 @@
                 <label for="group">Група:</label>
                 <select id="group" name="group" required>
                     <option value="">Оберіть групу</option>
-                    <option value="Group A">Група A</option>
-                    <option value="Group B">Група B</option>
-                    <option value="Group C">Група C</option>
-                    <!-- Додайте інші групи за потребою -->
+                    <option value="Group A">Група 111</option>
+                    <option value="Group B">Група 112</option>
+                    <option value="Group C">Група 211</option>
+                    <option value="Group A">Група 212</option>
+                    <option value="Group B">Група 311</option>
+                    <option value="Group C">Група 312</option>
+                    <option value="Group A">Група 411</option>
+                    <option value="Group B">Група 412</option>
                 </select>
 
                 <label for="course">Курс:</label>
@@ -83,7 +86,7 @@
                     <option value="Курс 1">Курс 1</option>
                     <option value="Курс 2">Курс 2</option>
                     <option value="Курс 3">Курс 3</option>
-                    <!-- Додайте інші курси за потребою -->
+                    <option value="Курс 3">Курс 4</option>
                 </select>
 
                 <label for="title">Заголовок:</label>
@@ -95,13 +98,13 @@
                 <label for="email">Адреса електронної пошти:</label>
                 <input type="email" id="email" name="email" required>
 
-                <!-- Перемістили кнопку нижче -->
+               
                 <button type="submit">Згенерувати напрямок</button>
             </form>
         </div>
         <div id="output" class="generated-direction"></div>
 
-        <!-- Перемістили кнопку сюди -->
+
         <button id="sendDirection" style="display: none;">Відправити напрямок</button>
     </div>
 
