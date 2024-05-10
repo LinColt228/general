@@ -42,15 +42,9 @@
             <label for="group">Група:</label>
             <select id="group" name="group" required>
                 <option value="">Оберіть групу</option>
-                <option value="Group A">Група 111</option>
-                <option value="Group B">Група 112</option>
-                <option value="Group C">Група 113</option>
-                <option value="Group A">Група 114</option>
-                <option value="Group B">Група 211</option>
-                <option value="Group C">Група 212</option>
-                <option value="Group A">Група 213</option>
-                <option value="Group B">Група 214</option>
-                <option value="Group C">Група 215</option>
+                <option value="Group A">Група A</option>
+                <option value="Group B">Група B</option>
+                <option value="Group C">Група C</option>
                 <!-- Додайте інші групи за потребою -->
             </select>
 
@@ -60,7 +54,6 @@
                 <option value="Курс 1">Курс 1</option>
                 <option value="Курс 2">Курс 2</option>
                 <option value="Курс 3">Курс 3</option>
-                <option value="Курс 3">Курс 4</option>
                 <!-- Додайте інші курси за потребою -->
             </select>
 
@@ -93,9 +86,25 @@
             // Генеруємо напрямок
             var direction = "Група: " + group + "\nКурс: " + course + "\nЗаголовок: " + title + "\nОпис: " + description + "\nАдреса електронної пошти: " + email;
 
+            // Відправляємо напрямок на електронну пошту
+            var subject = "Напрямок на перездачу";
+            var body = direction;
+            var mailToLink = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+
+            // Відкриваємо поштовий клієнт з заповненим листом
+            window.location.href = mailToLink;
+
+            // Опціонально: Очистити поля форми після відправки
+            document.getElementById('group').value = "";
+            document.getElementById('course').value = "";
+            document.getElementById('title').value = "";
+            document.getElementById('description').value = "";
+            document.getElementById('email').value = "";
+
             // Виводимо напрямок на сторінці
             document.getElementById('output').innerHTML = "<h3>Згенерований напрямок:</h3>" + direction;
         });
     </script>
 </body>
 </html>
+
