@@ -15,4 +15,4 @@
 
 
 # Перглянути продукт
-Розроблений продукт можна подивитись за цим посиланням (https://lincolt228.github.io/general/)](https://lincolt228.github.io/general/)
+Розроблений продукт можна подивитись за цим посиланням (https://lincolt228.github.io/general/)
