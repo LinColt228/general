@@ -47,8 +47,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            display: block;
-            margin: 0 auto;
+            margin-bottom: 20px; /* Знизимо кнопку */
         }
         button:hover {
             background-color: #45a049;
@@ -96,10 +95,14 @@
                 <label for="email">Адреса електронної пошти:</label>
                 <input type="email" id="email" name="email" required>
 
+                <!-- Перемістили кнопку нижче -->
                 <button type="submit">Згенерувати напрямок</button>
             </form>
         </div>
         <div id="output" class="generated-direction"></div>
+
+        <!-- Перемістили кнопку сюди -->
+        <button id="sendDirection" style="display: none;">Відправити напрямок</button>
     </div>
 
     <script>
@@ -120,26 +123,22 @@
             // Додаємо напрямок на сторінку
             document.getElementById('output').innerHTML = direction;
 
-            // Додаємо кнопку для відправки напрямку на пошту
-            var sendButton = document.createElement("button");
-            sendButton.textContent = "Відправити напрямок";
-            sendButton.addEventListener("click", function() {
-                // Надсилаємо напрямок на електронну пошту
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'send_email.php', true); // Замініть 'send_email.php' на URL вашого серверного скрипту
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        console.log(xhr.responseText); // Виведіть відповідь сервера у консоль
-                    }
-                };
-                xhr.send('group=' + encodeURIComponent(group) + '&course=' + encodeURIComponent(course) + '&title=' + encodeURIComponent(title) + '&description=' + encodeURIComponent(description) + '&email=' + encodeURIComponent(email));
-            });
+            // Показуємо кнопку для відправки напрямку на пошту
+            document.getElementById('sendDirection').style.display = 'block';
+        });
 
-            document.getElementById('output').appendChild(sendButton);
+        // Додавання обробника події для кнопки відправки напрямку на пошту
+        document.getElementById('sendDirection').addEventListener('click', function() {
+            // Отримуємо дані зі згенерованого напрямку
+            var directionData = document.getElementById('output').innerHTML;
+
+            // Виконайте тут логіку для відправки напрямку на вказану адресу електронної пошти
+            // Наприклад, ви можете використовувати AJAX-запит до серверного скрипта для відправки пошти
+            console.log('Відправлено на пошту:', directionData);
         });
     </script>
 </body>
 </html>
+
 
 
