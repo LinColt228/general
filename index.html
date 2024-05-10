@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор направлень на перездачу</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px; /* Знизимо кнопку */
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .generated-direction {
+            background-color: #f9f9f9;
+            border-left: 6px solid #7db4e6;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .generated-direction h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Генератор направлень на перездачу</h1>
+        <div class="form-container">
+            <form id="directionForm">
+                <label for="group">Група:</label>
+                <select id="group" name="group" required>
+                    <option value="">Оберіть групу</option>
+                    <option value="Group A">Група 111</option>
+                    <option value="Group B">Група 112</option>
+                    <option value="Group C">Група 211</option>
+                    <option value="Group A">Група 212</option>
+                    <option value="Group B">Група 311</option>
+                    <option value="Group C">Група 312</option>
+                    <option value="Group A">Група 411</option>
+                    <option value="Group B">Група 412</option>
+                </select>
+
+                <label for="course">Курс:</label>
+                <select id="course" name="course" required>
+                    <option value="">Оберіть курс</option>
+                    <option value="Курс 1">Курс 1</option>
+                    <option value="Курс 2">Курс 2</option>
+                    <option value="Курс 3">Курс 3</option>
+                    <option value="Курс 3">Курс 4</option>
+                </select>
+
+                <label for="title">Заголовок:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="description">Опис:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <label for="email">Адреса електронної пошти:</label>
+                <input type="email" id="email" name="email" required>
+
+               
+                <button type="submit">Згенерувати напрямок</button>
+            </form>
+        </div>
+        <div id="output" class="generated-direction"></div>
+
+
+        <button id="sendDirection" style="display: none;">Відправити напрямок</button>
+    </div>
+
+    <script>
+        // JavaScript код
+        document.getElementById('directionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Зупиняємо перезавантаження сторінки при відправці форми
+
+            // Отримуємо дані з форми
+            var group = document.getElementById('group').value;
+            var course = document.getElementById('course').value;
+            var title = document.getElementById('title').value;
+            var description = document.getElementById('description').value;
+            var email = document.getElementById('email').value;
+
+            // Генеруємо напрямок
+            var direction = "<h3>Згенерований напрямок:</h3><p><strong>Група:</strong> " + group + "</p><p><strong>Курс:</strong> " + course + "</p><p><strong>Заголовок:</strong> " + title + "</p><p><strong>Опис:</strong> " + description + "</p><p><strong>Адреса електронної пошти:</strong> " + email + "</p>";
+
+            // Додаємо напрямок на сторінку
+            document.getElementById('output').innerHTML = direction;
+
+            // Показуємо кнопку для відправки напрямку на пошту
+            document.getElementById('sendDirection').style.display = 'block';
+        });
+
+        // Додавання обробника події для кнопки відправки напрямку на пошту
+        document.getElementById('sendDirection').addEventListener('click', function() {
+            // Отримуємо дані зі згенерованого напрямку
+            var directionData = document.getElementById('output').innerHTML;
+
+            // Виконайте тут логіку для відправки напрямку на вказану адресу електронної пошти
+            // Наприклад, ви можете використовувати AJAX-запит до серверного скрипта для відправки пошти
+            console.log('Відправлено на пошту:', directionData);
+        });
+    </script>
+</body>
+</html>
