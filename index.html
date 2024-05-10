@@ -14,7 +14,7 @@
             margin: 0 auto;
             padding: 20px;
         }
-        input[type="text"], textarea {
+        input[type="text"], textarea, select {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -39,6 +39,24 @@
     <div class="container">
         <h2>Генератор направлень на перездачу</h2>
         <form id="directionForm">
+            <label for="group">Група:</label>
+            <select id="group" name="group" required>
+                <option value="">Оберіть групу</option>
+                <option value="Group A">Група A</option>
+                <option value="Group B">Група B</option>
+                <option value="Group C">Група C</option>
+                <!-- Додайте інші групи за потребою -->
+            </select>
+
+            <label for="course">Курс:</label>
+            <select id="course" name="course" required>
+                <option value="">Оберіть курс</option>
+                <option value="Курс 1">Курс 1</option>
+                <option value="Курс 2">Курс 2</option>
+                <option value="Курс 3">Курс 3</option>
+                <!-- Додайте інші курси за потребою -->
+            </select>
+
             <label for="title">Заголовок:</label>
             <input type="text" id="title" name="title" required>
 
@@ -59,44 +77,17 @@
             event.preventDefault(); // Зупиняємо перезавантаження сторінки при відправці форми
 
             // Отримуємо дані з форми
+            var group = document.getElementById('group').value;
+            var course = document.getElementById('course').value;
             var title = document.getElementById('title').value;
             var description = document.getElementById('description').value;
             var email = document.getElementById('email').value;
 
             // Генеруємо напрямок
-            var direction = "Заголовок: " + title + "<br>Опис: " + description + "<br>Адреса електронної пошти: " + email;
+            var direction = "Група: " + group + "\nКурс: " + course + "\nЗаголовок: " + title + "\nОпис: " + description + "\nАдреса електронної пошти: " + email;
 
             // Виводимо напрямок на сторінці
             document.getElementById('output').innerHTML = "<h3>Згенерований напрямок:</h3>" + direction;
-
-            document.getElementById('directionForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Зупиняємо перезавантаження сторінки при відправці форми
-
-    // Отримуємо дані з форми
-    var group = document.getElementById('group').value;
-    var title = document.getElementById('title').value;
-    var description = document.getElementById('description').value;
-    var email = document.getElementById('email').value;
-
-    // Генеруємо напрямок
-    var direction = "Група: " + group + "\nЗаголовок: " + title + "\nОпис: " + description + "\nАдреса електронної пошти: " + email;
-
-    // Відправляємо напрямок на електронну пошту
-    var subject = "Напрямок на перездачу";
-    var body = direction;
-    var mailToLink = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-
-    // Відкриваємо поштовий клієнт з заповненим листом
-    window.location.href = mailToLink;
-
-    // Опціонально: Очистити поля форми після відправки
-    document.getElementById('group').value = "";
-    document.getElementById('title').value = "";
-    document.getElementById('description').value = "";
-    document.getElementById('email').value = "";
-
-    // Виводимо напрямок на сторінці
-    document.getElementById('output').innerHTML = "<h3>Згенерований напрямок:</h3>" + direction;
         });
     </script>
 </body>
