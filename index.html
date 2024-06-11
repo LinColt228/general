@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
         label {
             font-weight: bold;
         }
-        input[type="text"], textarea, select {
+        input[type="text"], textarea, select, input[type="date"] {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -46,7 +46,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-bottom: 20px; /* Знизимо кнопку */
+            margin-bottom: 20px;
         }
         button:hover {
             background-color: #45a049;
@@ -61,23 +61,36 @@
             margin-top: 0;
         }
     </style>
+    <!-- Додаємо html2canvas бібліотеку -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Генератор направлень на перездачу</h1>
+        <h1>Генератор направлення на перездачу</h1>
         <div class="form-container">
             <form id="directionForm">
+                <label for="teacher">Викладач:</label>
+                <select id="teacher" name="teacher" required>
+                    <option value="">Оберіть викладача</option>
+                    <option value="Бабіч.О.В.">Бабіч.О.В.</option>
+                    <option value="Нестерук.О.Г.">Нестерук.О.Г.</option>
+                    <option value="Чепіга А.О.">Чепіга А.О.</option>
+                </select>
+
+                <label for="student">Студент:</label>
+                <input type="text" id="student" name="student" required>
+
                 <label for="group">Група:</label>
                 <select id="group" name="group" required>
                     <option value="">Оберіть групу</option>
-                    <option value="Group A">Група 111</option>
-                    <option value="Group B">Група 112</option>
-                    <option value="Group C">Група 211</option>
-                    <option value="Group A">Група 212</option>
-                    <option value="Group B">Група 311</option>
-                    <option value="Group C">Група 312</option>
-                    <option value="Group A">Група 411</option>
-                    <option value="Group B">Група 412</option>
+                    <option value="Група 111">Група 111</option>
+                    <option value="Група 112">Група 112</option>
+                    <option value="Група 211">Група 211</option>
+                    <option value="Група 212">Група 212</option>
+                    <option value="Група 311">Група 311</option>
+                    <option value="Група 312">Група 312</option>
+                    <option value="Група 411">Група 411</option>
+                    <option value="Група 412">Група 412</option>
                 </select>
 
                 <label for="course">Курс:</label>
@@ -86,58 +99,66 @@
                     <option value="Курс 1">Курс 1</option>
                     <option value="Курс 2">Курс 2</option>
                     <option value="Курс 3">Курс 3</option>
-                    <option value="Курс 3">Курс 4</option>
+                    <option value="Курс 4">Курс 4</option>
                 </select>
 
-                <label for="title">Заголовок:</label>
-                <input type="text" id="title" name="title" required>
+                <label for="subject">Предмет:</label>
+                <select id="subject" name="subject" required>
+                    <option value="">Оберіть предмет</option>
+                    <option value="Програмне забезпечення">Програмне забезпечення</option>
+                    <option value="Охорона праці">Охорона праці</option>
+                    <option value="Фізична культура">Фізична культура</option>
+                </select>
 
-                <label for="description">Опис:</label>
-                <textarea id="description" name="description" rows="4" required></textarea>
+                <label for="result">Результат перездачі:</label>
+                <input type="text" id="result" name="result" required>
 
-                <label for="email">Адреса електронної пошти:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="date">Дата:</label>
+                <input type="date" id="date" name="date" required>
 
-               
-                <button type="submit">Згенерувати напрямок</button>
+                <button type="submit">Згенерувати направлення</button>
             </form>
         </div>
         <div id="output" class="generated-direction"></div>
-
-
-        <button id="sendDirection" style="display: none;">Відправити напрямок</button>
+        <button id="downloadDirection" style="display: none;">Завантажити направлення</button>
     </div>
 
     <script>
-        // JavaScript код
         document.getElementById('directionForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Зупиняємо перезавантаження сторінки при відправці форми
+            event.preventDefault();
 
-            // Отримуємо дані з форми
+            var teacher = document.getElementById('teacher').value;
+            var student = document.getElementById('student').value;
             var group = document.getElementById('group').value;
             var course = document.getElementById('course').value;
-            var title = document.getElementById('title').value;
-            var description = document.getElementById('description').value;
-            var email = document.getElementById('email').value;
+            var subject = document.getElementById('subject').value;
+            var result = document.getElementById('result').value;
+            var date = document.getElementById('date').value;
 
-            // Генеруємо напрямок
-            var direction = "<h3>Згенерований напрямок:</h3><p><strong>Група:</strong> " + group + "</p><p><strong>Курс:</strong> " + course + "</p><p><strong>Заголовок:</strong> " + title + "</p><p><strong>Опис:</strong> " + description + "</p><p><strong>Адреса електронної пошти:</strong> " + email + "</p>";
+            var direction = `
+                <div style="font-family: Arial, sans-serif;">
+                    <p>Викладач: ${teacher}</p>
+                    <p>Студент ${student} ${group}, ${course} направляється до Вас для здачі повторного іспиту з предмету ${subject}</p>
+                    <p>В результаті перездачі іспиту (заліку) студент отримав оцінку: ${result}</p>
+                    <p>Викладач: ____________________</p>
+                    <p>Дата: ${date} р.</p>
+                    <p style="text-align: right;">Підпис: ____________________</p>
+                </div>
+            `;
 
-            // Додаємо напрямок на сторінку
             document.getElementById('output').innerHTML = direction;
-
-            // Показуємо кнопку для відправки напрямку на пошту
-            document.getElementById('sendDirection').style.display = 'block';
+            document.getElementById('downloadDirection').style.display = 'block';
         });
 
-        // Додавання обробника події для кнопки відправки напрямку на пошту
-        document.getElementById('sendDirection').addEventListener('click', function() {
-            // Отримуємо дані зі згенерованого напрямку
-            var directionData = document.getElementById('output').innerHTML;
-
-            // Виконайте тут логіку для відправки напрямку на вказану адресу електронної пошти
-            // Наприклад, ви можете використовувати AJAX-запит до серверного скрипта для відправки пошти
-            console.log('Відправлено на пошту:', directionData);
+        document.getElementById('downloadDirection').addEventListener('click', function() {
+            html2canvas(document.getElementById('output'), {
+                onrendered: function(canvas) {
+                    var link = document.createElement('a');
+                    link.href = canvas.toDataURL('image/png');
+                    link.download = 'Направлення.png';
+                    link.click();
+                }
+            });
         });
     </script>
 </body>
