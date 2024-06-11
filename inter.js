@@ -7,17 +7,16 @@
             var group = document.getElementById('group').value;
             var course = document.getElementById('course').value;
             var subject = document.getElementById('subject').value;
-            var result = document.getElementById('result').value;
             var date = document.getElementById('date').value;
 
             var direction = `
                 <div style="font-family: Arial, sans-serif;">
-                    <p>Викладач: ${teacher}</p>
                     <p>Студент ${student} ${group}, ${course} направляється до Вас для здачі повторного іспиту з предмету ${subject}</p>
-                    <p>В результаті перездачі іспиту (заліку) студент отримав оцінку: ___________</p>
-                    <p>Викладач: ____________________</p>
+                    <p>В результаті перездачі іспиту (заліку) студент отримав оцінку:_________</p>
+                    <p>Викладач: ${teacher}</p>
                     <p>Дата: ${date} р.</p>
-                    <p style="text-align: right;">Підпис: ____________________</p>
+                    <p style="text-align: left;">Підпис викладача: ____________________</p>
+                    <p style="text-align: right;">Підпис зав.відділення: ____________________</p>
                 </div>
             `;
 
