@@ -1,4 +1,4 @@
- <script>
+  <script>
         document.getElementById('directionForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
