@@ -30,7 +30,7 @@
         label {
             font-weight: bold;
         }
-        input[type="text"], textarea, select, input[type="date"] {
+        input[type="text"], select, input[type="date"] {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -133,12 +133,12 @@
 
             var direction = `
                 <div style="font-family: Arial, sans-serif;">
-                    <p>Викладач: ${teacher}</p>
                     <p>Студент ${student} ${group}, ${course} направляється до Вас для здачі повторного іспиту з предмету ${subject}</p>
-                    <p>В результаті перездачі іспиту (заліку) студент отримав оцінку: ___________</p>
-                    <p>Викладач: ____________________</p>
+                    <p>В результаті перездачі іспиту (заліку) студент отримав оцінку:_________</p>
+                    <p>Викладач: ${teacher}</p>
                     <p>Дата: ${date} р.</p>
-                    <p style="text-align: right;">Підпис: ____________________</p>
+                    <p style="text-align: left;">Підпис викладача: ____________________</p>
+                    <p style="text-align: right;">Підпис зав.відділення: ____________________</p>
                 </div>
             `;
 
