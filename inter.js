@@ -1,4 +1,4 @@
-  <script>
+ <script>
         document.getElementById('directionForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -6,15 +6,20 @@
             var student = document.getElementById('student').value;
             var group = document.getElementById('group').value;
             var course = document.getElementById('course').value;
+			var boos = document.getElementById('boos').value;
             var subject = document.getElementById('subject').value;
-            var date = document.getElementById('date').value;
+			var teacher = document.getElementById('teacher').value;
 
             var direction = `
                 <div style="font-family: Arial, sans-serif;">
+                    <p style="text-align: center;"> ВСП НТУ "ХПІ"</p>
+                    <p style="text-align: center;"> денне відділення</p>
                     <p>Студент ${student} ${group}, ${course} направляється до Вас для здачі повторного іспиту з предмету ${subject}</p>
+                    <p>Зав.відділенням: ${boos}</p>
+                    <p>""___""_______________20__р.</p>
                     <p>В результаті перездачі іспиту (заліку) студент отримав оцінку:_________</p>
                     <p>Викладач: ${teacher}</p>
-                    <p>Дата: ${date} р.</p>
+                    <p>Дата: ""___""_______________20__р.</p>
                     <p style="text-align: left;">Підпис викладача: ____________________</p>
                     <p style="text-align: right;">Підпис зав.відділення: ____________________</p>
                 </div>
